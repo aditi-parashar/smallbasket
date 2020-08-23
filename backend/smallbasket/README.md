@@ -11,3 +11,5 @@ Smallbasket Cart Backend App built with Java + Spring Boot
 - Next, run- mvn spring-boot:run
   - It will start the backend app in your system at port 8080
   - Open http://localhost:8080 in your browser
+
+Since this is only the backend code, a tool such as postman can be used to test the APIs.
