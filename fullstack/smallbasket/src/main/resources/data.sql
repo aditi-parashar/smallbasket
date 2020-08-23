@@ -16,7 +16,7 @@ INSERT INTO products (name, price, image) VALUES
   ('Dress', 5000.00, 'dress.jpg'),
   ('Sunglasses', 1250.00, 'sunglasses.jpg'),
   ('Chair', 3500.00, 'chair.jpg'),
-  ('Table', 8000.00, 'table.jpg');
+  ('Table', 8000.00, 'table2.jpg');
 
 CREATE TABLE cart (
   item_id INT AUTO_INCREMENT  PRIMARY KEY,
