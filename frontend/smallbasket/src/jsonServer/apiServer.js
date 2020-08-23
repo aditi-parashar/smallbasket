@@ -17,7 +17,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.post("/cart", function (req, res, next) {
+server.post("/cart/", function (req, res, next) {
   const error = validateCartItem(req.body);
   if (error) {
     res.status(400).send(error);

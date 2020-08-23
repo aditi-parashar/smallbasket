@@ -49,12 +49,12 @@ const products = [
   },
 ];
 
-const cartItems = [
+const cart = [
   { itemId: 1, productId: 1, quantity: 1 },
   { itemId: 2, productId: 3, quantity: 4 },
 ];
 
 module.exports = {
   products,
-  cartItems,
+  cart,
 };
