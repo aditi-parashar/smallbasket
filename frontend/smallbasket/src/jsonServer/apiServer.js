@@ -22,7 +22,7 @@ server.post("/cart/", function (req, res, next) {
   if (error) {
     res.status(400).send(error);
   } else {
-    req.body.slug = req.body.itemId;
+    req.body.slug = req.body.id;
     next();
   }
 });
@@ -35,8 +35,8 @@ server.listen(port, () => {
 });
 
 function validateCartItem(cartItem) {
-  if (!cartItem.itemId || cartItem.itemId < 0) return "Item Id is not valid";
-  if (!cartItem.productId || cartItem.productId < 0)
+  if (!cartItem.id || cartItem.id < 0) return "Item Id is not valid";
+  if (!cartItem.product.id || cartItem.product.id < 0)
     return "Product Id is not valid";
   if (!cartItem.quantity || cartItem.quantity < 1)
     return "Item quantity is not valid";

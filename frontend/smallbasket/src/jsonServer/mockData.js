@@ -50,8 +50,26 @@ const products = [
 ];
 
 const cart = [
-  { itemId: 1, productId: 1, quantity: 1 },
-  { itemId: 2, productId: 3, quantity: 4 },
+  {
+    id: 1,
+    product: {
+      id: 1,
+      name: "Laptop",
+      price: 80000,
+      imageName: "laptop.jpg",
+    },
+    quantity: 1,
+  },
+  {
+    id: 2,
+    product: {
+      id: 5,
+      name: "Dress",
+      price: 5000,
+      imageName: "dress.jpg",
+    },
+    quantity: 4,
+  },
 ];
 
 module.exports = {
