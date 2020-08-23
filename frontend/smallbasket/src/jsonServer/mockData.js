@@ -49,28 +49,31 @@ const products = [
   },
 ];
 
-const cart = [
-  {
-    id: 1,
-    product: {
-      id: 1,
-      name: "Laptop",
-      price: 80000,
-      imageName: "laptop.jpg",
-    },
-    quantity: 1,
-  },
-  {
-    id: 2,
-    product: {
-      id: 5,
-      name: "Dress",
-      price: 5000,
-      imageName: "dress.jpg",
-    },
-    quantity: 4,
-  },
-];
+const cart = [];
+
+/* Below Data can be used to mock items in cart before start up */
+// const cart = [
+//   {
+//     id: 1,
+//     product: {
+//       id: 1,
+//       name: "Laptop",
+//       price: 80000,
+//       imageName: "laptop.jpg",
+//     },
+//     quantity: 1,
+//   },
+//   {
+//     id: 2,
+//     product: {
+//       id: 5,
+//       name: "Dress",
+//       price: 5000,
+//       imageName: "dress.jpg",
+//     },
+//     quantity: 4,
+//   },
+// ];
 
 module.exports = {
   products,
