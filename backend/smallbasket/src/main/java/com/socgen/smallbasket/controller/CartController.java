@@ -40,20 +40,25 @@ public class CartController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CartItem addToCart(@Valid @RequestBody final CartItem cartItem) {
-        /* If the Item Id in the request body is not null and has a value */
-        if ( cartItem.getItemId() > 0 ) {
-            List<CartItem> cartItems = cartRepository.findAll();
-            if (cartItems.size() != 0) {
-                for (CartItem item : cartItems) {
-                    /* Check if the Item Id already exists */
-                    if ( item.getItemId() == cartItem.getItemId() ) {
+        /* If the Item Id in the request body or the product already exists in the cart */
+        List<CartItem> cartItems = cartRepository.findAll();
+        if (cartItems.size() != 0) {
+            for (CartItem item : cartItems) {
+                /* Check if the Item Id already exists */
+                if ( cartItem.getItemId() > 0 ) {
+                    if (item.getItemId() == cartItem.getItemId()) {
                         /* If the Item Id exists in the cart, then POST is not allowed. */
                         throw new CartItemAlreadyExists();
-                    } else if ( item.getProduct().getId() == cartItem.getProduct().getId() ) {
-                        throw new CartItemAlreadyExists();
                     }
+                } else if ( item.getProduct().getId() == cartItem.getProduct().getId() ) {
+                    throw new CartItemAlreadyExists();
                 }
             }
+        }
+
+        /* If the quantity is less than 0 */
+        if (cartItem.getQuantity() <= 0) {
+            throw new QuantityException();
         }
 
         CartItem returnCartItem =  cartRepository.saveAndFlush(cartItem);
@@ -72,10 +77,12 @@ public class CartController {
         /* Get the item from the cart table using the received id, update its quantity and persist */
         Optional<CartItem> optionalCartItem = cartRepository.findById(id);
 
+        /* If the item doesn't exist */
         if (!optionalCartItem.isPresent()) {
             throw new CartItemNotFoundException();
         }
 
+        /* If the quantity is less than 0 */
         if (cartItem.getQuantity() <= 0) {
             throw new QuantityException();
         }
@@ -96,7 +103,7 @@ public class CartController {
         try {
             cartRepository.deleteById(id);
         } catch(EmptyResultDataAccessException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item doesn't exist in the cart.", e);
+            throw new CartItemNotFoundException();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error updating item in the cart.", e);
         }
